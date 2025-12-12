@@ -1,5 +1,7 @@
 ## STM32F103 based Temperature Sensitive Fan (LM35 temperature sensor + DFROBOT MOSFET + Buzzer)
 
+Authors: Bunyod Suvonov, Wee Keat Lim
+
 Minimal firmware for STM32F103C8 that reads an LM35 temperature sensor on `PB0`, switches a 5 V fan through a MOSFET on/off via `PB1`, and drives a KY-012 buzzer on `PB2`. The fan is **off below ~30 °C** and **fully on at ≥30 °C**; the buzzer asserts at ≥40 °C (both with a small hysteresis).
 
 <img width="2394" height="1531" alt="Screenshot From 2025-12-12 21-52-28" src="https://github.com/user-attachments/assets/919dab0e-ed61-455c-bb14-a53641ff1ccc" />
