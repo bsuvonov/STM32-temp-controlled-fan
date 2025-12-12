@@ -1,4 +1,3 @@
-/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file           : main.c
@@ -15,7 +14,6 @@
   *
   ******************************************************************************
   */
-/* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
@@ -23,18 +21,13 @@
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "LCD.h"
-/* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
 
-/* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
 #define FAN_TEST_MODE          0   // Set to 1 to force fan on for wiring test
 #define FAN_ON_THRESHOLD_C    30.0f
 #define FAN_FULL_THRESHOLD_C  30.0f
@@ -43,28 +36,20 @@
 #define TEMP_SAMPLES           16u
 #define FAN_PWM_MAX_COUNT     1u     // placeholder; GPIO mode only
 #define FAN_MIN_DUTY_RATIO     1.0f  // unused in GPIO mode
-/* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
 
-/* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 
-/* USER CODE BEGIN PV */
 uint8_t buzzer_on = 0;
 uint16_t fan_duty_counts = 0;
-/* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
 
 static float Read_Temperature_C(void)
 {
@@ -91,7 +76,6 @@ static void Set_Fan_Duty(uint16_t duty_counts)
   HAL_GPIO_WritePin(FAN_GPIO_Port, FAN_Pin, (fan_duty_counts > 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
-/* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
@@ -100,31 +84,24 @@ static void Set_Fan_Duty(uint16_t duty_counts)
 int main(void)
 {
 
-  /* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  /* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
 
-  /* USER CODE BEGIN SysInit */
 
-  /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_ADC1_Init();
-  /* USER CODE BEGIN 2 */
   HAL_ADCEx_Calibration_Start(&hadc1);
   Set_Fan_Duty(0);
 
@@ -133,15 +110,11 @@ int main(void)
   LCD_Display_String(0,0,(uchar *)"Temp Fan Ready");
   LCD_Display_String(0,1,(uchar *)"LM35->PB0 ADC1");
 
-  /* USER CODE END 2 */
 
   /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
 #if FAN_TEST_MODE
     Set_Fan_Duty(FAN_PWM_MAX_COUNT);
     HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, GPIO_PIN_RESET);
@@ -195,7 +168,6 @@ int main(void)
 
     HAL_Delay(200);
   }
-  /* USER CODE END 3 */
 
 }
 /**
@@ -244,9 +216,7 @@ void SystemClock_Config(void)
   }
 }
 
-/* USER CODE BEGIN 4 */
 
-/* USER CODE END 4 */
 
 /**
   * @brief  This function is executed in case of error occurrence.
@@ -254,13 +224,11 @@ void SystemClock_Config(void)
   */
 void Error_Handler(void)
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
   while (1)
   {
   }
-  /* USER CODE END Error_Handler_Debug */
 }
 #ifdef USE_FULL_ASSERT
 /**
@@ -272,9 +240,7 @@ void Error_Handler(void)
   */
 void assert_failed(uint8_t *file, uint32_t line)
 {
-  /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
