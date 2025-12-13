@@ -35,7 +35,7 @@ st-flash --reset write Lab3.bin 0x08000000
 If `st-flash` warns about libusb, unplug/replug ST-LINK and retry. NRST is not connected, so `st-flash` uses software reset.
 
 
-### Watch demo here:
+## Watch demo here:
 
 
 <a href="https://youtu.be/lh_6Y_hIUkY" target="_blank">
